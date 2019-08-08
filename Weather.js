@@ -5,7 +5,7 @@ function GetProvinces() {
         data: {
             grade: 'province',
         },
-        url: 'http://cdn.weather.hao.360.cn/sed_api_area_query.php',
+        url: 'https://cdn.weather.hao.360.cn/sed_api_area_query.php',
         jsonp: '_jsonp',
         jsonpCallback: 'loadProvince',
         success: function(data) {
