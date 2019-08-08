@@ -36,7 +36,7 @@ function GetCitys(code) {
             grade: 'city',
             code: code,
         },
-        url: 'http://cdn.weather.hao.360.cn/sed_api_area_query.php',
+        url: 'https://cdn.weather.hao.360.cn/sed_api_area_query.php',
         jsonp: '_jsonp',
         jsonpCallback: 'loadCity2',
         success: function(data) {
@@ -71,7 +71,7 @@ function GetAreas(city) {
             grade: 'town',
             code: city,
         },
-        url: 'http://cdn.weather.hao.360.cn/sed_api_area_query.php',
+        url: 'https://cdn.weather.hao.360.cn/sed_api_area_query.php',
         jsonp: '_jsonp',
         jsonpCallback: 'loadTown',
         success: function(data) {
@@ -101,7 +101,7 @@ function GetWeather(city) {
             t: t[0],
             c: t[1],
         },
-        url: 'http://tq.360.cn/api/weatherquery/querys',
+        url: 'https://tq.360.cn/api/weatherquery/querys',
         jsonp: '_jsonp',
         jsonpCallback: 'renderData',
         success: function(data) {
