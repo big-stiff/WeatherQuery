@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./jquery-3.4.1.js"></script>
+    <script src="./template-web.js"></script>
+    <script src="./Weather.js"></script>
+    <title>360天气api</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .clearfix {
+            *zoom: 1
+        }
+        
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table
+        }
+        
+        .clearfix:after {
+            clear: both
+        }
+        
+        .fl {
+            float: left;
+        }
+        
+        ul li {
+            list-style: none;
+        }
+        
+        #selects {
+            background-color: #ccc;
+            width: 600px;
+            margin: 50px auto 10px;
+            text-align: center;
+            display: flex;
+            height: 40px;
+        }
+        
+        .blocks {
+            width: 100px;
+            height: 30px;
+        }
+        
+        select {
+            flex: 2;
+        }
+        
+        .searchbtn {
+            background: skyblue url(./img/search_btn.png) no-repeat center;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .searchbtn:hover {
+            box-shadow: 5px 5px 5px rgb(0, 195, 255) inset, -5px -5px 5px rgb(0, 195, 255) inset;
+        }
+        
+        #weather_info {
+            width: 600px;
+            margin: 0 auto;
+            background-color: #ccc;
+            display: flex;
+            opacity: 0;
+        }
+        
+        #weather_info ul {
+            flex: 1;
+            font: 500 14px/30px "MicrosoftYaHei";
+            text-align: center;
+            cursor: default;
+            transition: all 0.5s;
+            -webkit-user-select: none;
+            -ms-touch-select: none;
+        }
+        
+        #weather_info ul:hover {
+            box-shadow: 15px 15px 25px #ddd inset, -15px -15px 25px #ddd inset;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="selects" class="clearfix">
+        <select name="" id="provinces"></select>
+        <select name="" id="citys"></select >
+        <select name="" id="areas" ></select>
+        <span class="searchbtn fl" id="searchbtn"></span>
+    </div>
+    <div id="weather_info">
+        <script id="Weather_temp" type="text/template">
+            {{if weather}} {{each weather value index}} {{if index>0 && index
+            <5}} <ul>
+                <li>日期 {{value.date}}</li>
+                <li>温度 {{value.info.night[2]}}°~{{value.info.day[2]}}°</li>
+                <li>白天 {{value.info.day[1]}}</li>
+                <li>夜间 {{value.info.night[1]}}</li>
+                <!-- <li>白天风向 {{value.info.day[3]}}</li> -->
+                <li>白天风力 {{value.info.day[4]}}</li>
+                <!-- <li>夜间风向 {{value.info.night[3]}}</li> -->
+                <li>夜间风力 {{value.info.night[4]}}</li>
+                <li>空气质量 {{pm25.quality}}</li>
+                </ul>
+                {{/if}} {{/each}} {{/if}}
+        </script>
+    </div>
+
+    <script>
+        $(function() {
+            //获取省份
+            GetProvinces();
+            //省份修改获取城市、区域
+            $('#provinces').change(function() {
+                    //console.log($(this).val());
+                    let code = $(this).val();
+                    GetCitys(code);
+                })
+                //城市修改获取区域
+            $('#citys').change(function() {
+                    //console.log($(this).val());
+                    let city = $(this).val();
+                    GetAreas(city);
+                })
+                //
+                // $('#areas').change(function() {
+                //     //console.log($(this).val());
+                //     let area = $(this).val();
+                //     GetWeather(area);
+                // })
+
+            $('#searchbtn').click(function() {
+                let area = $('#areas').val();
+                GetWeather(area);
+
+            })
+        });
+    </script>
+
+</body>
+
+</html>
